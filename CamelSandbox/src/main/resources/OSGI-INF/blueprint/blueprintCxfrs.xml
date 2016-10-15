@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+       
+       
+       http://camel.apache.org/schema/cxf 
+         http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+
+
+	<bean id="helloBean" class="com.zerses.camelsandbox.cxfrs.HelloBean">
+		<property name="say" value="Hi from Camel" />
+	</bean>
+
+	<!-- <bean id="orderEndpoint" class="com.xby2.dcooper.OrderEndpointService"> 
+		</bean> -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+		<package>com.zerses.camelsandbox.cxfrs</package>
+
+		<!-- <route> <from uri="cxf:bean:orderEndpoint" /> <to uri="seda:incomingOrders" 
+			/> <transform> <constant>OK</constant> </transform> </route> -->
+		<!-- test route -->
+		<route>
+			<from uri="seda:incomingOrders" />
+			<to uri="mock:end" />
+		</route>
+	</camelContext>
+
+</blueprint>
