@@ -12,7 +12,7 @@ public class MulticastPipelinesTest extends RouteBuilder {
     public void configure() throws Exception {
         from("direct:start")
         .log("after direct:start body=${body}")
-        .multicast().aggregationStrategy(AggregationStrategies.groupedExchange())
+        .multicast()
           .pipeline("direct:A", "direct:B")
           .pipeline().to("direct:C").to("direct:D").end()
         .end();
