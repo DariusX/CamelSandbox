@@ -13,38 +13,26 @@ public class CsvComponentTest extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		String inDir = "c:/test/in1a";
-		
-		final CsvDataFormat csv = new CsvDataFormat(";");
-		csv.setLazyLoad(true);
-		//csv.setSkipFirstLine(true);
+        String inDir = "c:/test/in1a";
 
-	        from("file://" + inDir + "?noop=true")
-		.unmarshal(csv)
-		.split(body()).streaming().parallelProcessing()
-		//.bean(validator, "validateNumber")
-		//.filter(header(ValidateProcess.Valid).isEqualTo(true))
-		.throttle(4)
-		//.bean(validator, "validate")
-		.marshal()
-		.csv()
-		.process(new DataTypeCheck())
-		//.to(out)
-		.log("done.")
-		.end();
-		
-		
-//	      from("file://" + inDir + "?noop=true")
-//              .split(body().tokenize("\n")).streaming().parallelProcessing()
-//              .process(new DataTypeCheck("After split: "))
-//              .unmarshal().csv()
-//              .process(new DataTypeCheck("After csv: "))
-//              .marshal().csv()
-//              .process(new DataTypeCheck("After marshal: "))
-//              .end()
-//              //.aggregate(new ConstantExpression("Z"))
-//              .process(new DataTypeCheck("After aggregate: "));
+        final CsvDataFormat csv = new CsvDataFormat(",");
+        csv.setLazyLoad(true);
+        // csv.setSkipFirstLine(true);
 
+        from("file://" + inDir + "?noop=true")
+            .unmarshal(csv)
+            .split(body()).streaming().parallelProcessing()
+            .throttle(4)
+            .log("done ${in.body}.")
+            .process(new DataTypeCheck())
+
+            // The following will not work as-is, because csv cannot marshal
+            // from a List to a comma-delimited String.
+            // It marshals from a Map or from a List of Maps
+            // .marshal()
+            // .csv()
+
+            .end();
 
 	}
 	
