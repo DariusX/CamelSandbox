@@ -13,7 +13,7 @@ public class MulticastPipelinesTest extends RouteBuilder {
         from("direct:start")
         .log("after direct:start body=${body}")
         .multicast().aggregationStrategy(AggregationStrategies.groupedExchange())
-          .pipeline().to("direct:A").to("direct:B").end()
+          .pipeline("direct:A", "direct:B")
           .pipeline().to("direct:C").to("direct:D").end()
         .end();
 
