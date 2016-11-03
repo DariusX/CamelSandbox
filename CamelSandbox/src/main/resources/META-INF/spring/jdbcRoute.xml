@@ -23,7 +23,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/test1" />
 		<property name="username" value="root" />
-		<property name="password" value="OREZPass01" />
+		<property name="password" value="${DBPASS}" />
 	</bean>
 
 	<bean name="route08Bean" class="com.zerses.camelsandbox.sql.RouteBuilder08" />
