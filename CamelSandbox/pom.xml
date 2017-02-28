@@ -19,7 +19,32 @@
 		<cxf-version>3.1.7</cxf-version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>ao-central</id>
+			<name>libs-release</name>
+			<url>http://jarrep1.aoins.com/artifactory/libs-release</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>com.ibm.db2.jcc</groupId>
+			<artifactId>db2jcc</artifactId>
+			<version>3.53.81</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.db2.jcc</groupId>
+			<artifactId>db2jcc_license_cisuz</artifactId>
+			<version>3.53.81</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
@@ -160,7 +185,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>

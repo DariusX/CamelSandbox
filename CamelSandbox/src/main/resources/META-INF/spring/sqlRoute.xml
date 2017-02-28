@@ -26,6 +26,14 @@
 		<property name="password" value="${DBPASS}" />
 	</bean>
 
+	<bean name="AODB2"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="url" value="jdbc:db2://dba1.testz.aoins.com:3058/AOICDBA1" />
+		<property name="username" value="********" />
+		<property name="password" value="********" />
+	</bean>
+	
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
 
 	</camelContext>

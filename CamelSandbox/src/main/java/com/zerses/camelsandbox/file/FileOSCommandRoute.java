@@ -7,10 +7,11 @@ import com.zerses.camelsandbox.common.DataTypeCheck;
 
 public class FileOSCommandRoute extends RouteBuilder {
 
+
   @Override
   public void configure() throws Exception {
 
-    //Handling an entire file as a single message, without splitting into recoprds
+    //Handling an entire file as a single message, without splitting into records
       
     from("file://c:/test/in1a?move=../arch/${date:now:yyyyMMddhhmmss}.${file:name}")
    .process(new DataTypeCheck())
